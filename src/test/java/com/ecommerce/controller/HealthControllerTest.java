@@ -20,4 +20,3 @@ class HealthControllerTest {
         assertNotNull(body.get("timestamp"));
     }
 }
-

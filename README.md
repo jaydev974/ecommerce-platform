@@ -13,4 +13,3 @@ docker compose up --build
 Verify it at `http://localhost:8080/api/v1/health`.
 
 > This repository is currently a backend foundation, not a complete customer-facing full-stack shop. See the guide for what remains to implement.
-

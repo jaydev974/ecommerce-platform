@@ -93,4 +93,3 @@ public class User {
         ROLE_CUSTOMER
     }
 }
-

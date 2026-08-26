@@ -107,4 +107,3 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error("Internal server error", "An unexpected error occurred", 500));
     }
 }
-

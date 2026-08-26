@@ -14,4 +14,3 @@ logging:
     root: DEBUG
     com.ecommerce: DEBUG
     org.springframework: DEBUG
-

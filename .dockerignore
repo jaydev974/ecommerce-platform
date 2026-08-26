@@ -6,4 +6,3 @@ logs
 .env
 *.log
 BUILD_FROM_SCRATCH.md
-

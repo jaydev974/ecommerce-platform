@@ -73,4 +73,3 @@ CREATE TABLE addresses (
     PRIMARY KEY (id),
     CONSTRAINT fk_addresses_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
-

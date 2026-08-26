@@ -72,4 +72,3 @@ The repository currently provides the database model, JWT security foundation, h
 Build an immutable image with `docker build -t ecommerce-platform:1.0.0 .`, push it to your registry, and deploy it together with a managed MySQL 8 database. Set `SPRING_PROFILES_ACTIVE=prod` and provide `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, and `JWT_SECRET` through the platform's secret manager. Do not bake secrets into the image or commit `.env`.
 
 After deployment, make the platform health check call `/api/v1/health`. Back up the database before applying new migrations, run migrations once per release, and use HTTPS through the hosting platform or a reverse proxy.
-

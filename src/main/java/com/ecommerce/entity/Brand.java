@@ -39,4 +39,3 @@ public class Brand {
     @Column(name = "is_active")
     private boolean active = true;
 }
-

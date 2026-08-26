@@ -52,4 +52,3 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         httpServletResponse.getWriter().write(objectMapper.writeValueAsString(response));
     }
 }
-
