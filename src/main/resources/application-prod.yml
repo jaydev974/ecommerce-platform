@@ -9,6 +9,9 @@ spring:
       ddl-auto: validate
     show-sql: false
 
+jwt:
+  secret: ${JWT_SECRET}
+
 server:
   compression:
     enabled: true
@@ -17,3 +20,4 @@ logging:
   level:
     root: WARN
     com.ecommerce: INFO
+

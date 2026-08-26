@@ -11,3 +11,4 @@ public class RoleConstants {
     public static final String ROLE_SELLER = "ROLE_SELLER";
     public static final String ROLE_CUSTOMER = "ROLE_CUSTOMER";
 }
+

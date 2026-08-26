@@ -8,10 +8,9 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Product entity representing items available for purchase.
@@ -32,7 +31,7 @@ public class Product {
     private Long id;
 
     @NotBlank(message = "Product name is required")
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 19, scale = 2)
     private String name;
 
     @NotBlank(message = "Description is required")
@@ -43,10 +42,10 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(name = "discount_percentage")
+    @Column(name = "discount_percentage", precision = 19, scale = 2)
     private BigDecimal discountPercentage = BigDecimal.ZERO;
 
-    @Positive(message = "Stock quantity must be positive")
+    @PositiveOrZero(message = "Stock quantity cannot be negative")
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
 
@@ -80,15 +79,6 @@ public class Product {
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductImage> images = new HashSet<>();
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Review> reviews = new HashSet<>();
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CartItem> cartItems = new HashSet<>();
-
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -100,3 +90,4 @@ public class Product {
         updatedAt = LocalDateTime.now();
     }
 }
+

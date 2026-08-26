@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,11 +33,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true
-)
+@EnableMethodSecurity(jsr250Enabled = true)
 public class SecurityConfig {
 
     @Autowired
@@ -77,23 +73,24 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authz -> authz
                         // Public endpoints
-                        .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/products/public/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/products/public/**").permitAll()
+                        .requestMatchers("/health").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/brands/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/brands/**").permitAll()
                         
                         // Admin endpoints
-                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/sellers/**").hasRole("SELLER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/sellers/**").hasRole("SELLER")
                         
                         // User endpoints
-                        .requestMatchers("/api/v1/users/**").authenticated()
-                        .requestMatchers("/api/v1/cart/**").authenticated()
-                        .requestMatchers("/api/v1/orders/**").authenticated()
-                        .requestMatchers("/api/v1/payments/**").authenticated()
-                        .requestMatchers("/api/v1/reviews/**").authenticated()
-                        .requestMatchers("/api/v1/wishlist/**").authenticated()
+                        .requestMatchers("/users/**").authenticated()
+                        .requestMatchers("/cart/**").authenticated()
+                        .requestMatchers("/orders/**").authenticated()
+                        .requestMatchers("/payments/**").authenticated()
+                        .requestMatchers("/reviews/**").authenticated()
+                        .requestMatchers("/wishlist/**").authenticated()
                         
                         // All other requests require authentication
                         .anyRequest().authenticated()
@@ -105,3 +102,4 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
